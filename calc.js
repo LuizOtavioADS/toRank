@@ -1,14 +1,14 @@
 
 function main() {
 
-    function calcRank() {
+    function calcRank(totalJogadores) {
         let jogadores = []
         let opcao = ""
 
         do {
             opcao = prompt(
                 "Olá! Bem vindo ao NerdGame." +
-                "\nTotal de jogadores: " + jogadores.length +
+                "\nTotal de jogadores: " + totalJogadores +
                 "\n1. Adicionar jogador" +
                 "\n2. Remover jogador" +
                 "\n3. Sair")
@@ -42,14 +42,17 @@ function main() {
 
                     if (confirma) {
                         jogadores.push(jogador)
+                        totalJogadores++
                     }
                     break;
 
                 case "2":
-                    for (let i = 0; i < jogadores.length; i++) {
-                        alert("Jogador " + (i + 1) +
-                            "Nome: " + jogador[i].nome +
-                            "Rank: " + jogador[i].rank)
+                    if (jogadores.length > 0) {
+                        jogadores.pop();
+                        totalJogadores--;
+                        alert("Último jogador removido.");
+                    } else {
+                        alert("Não há jogadores para remover.");
                     }
                     break;
 
@@ -62,11 +65,13 @@ function main() {
 
             }
 
-        } while (opcao !== "3")
+        } while (opcao !== "3");
 
+        return totalJogadores;
     }
 
-    calcRank();
+    let totalJogadores = 0;
+    totalJogadores = calcRank(totalJogadores);
 
 }
 
